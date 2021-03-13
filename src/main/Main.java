@@ -2,7 +2,6 @@ package main;
 
 public class Main {
 
-	//Teste
 	public static void main(String[] args) {
 	    try {
             Stack st = new Stack(2);  
