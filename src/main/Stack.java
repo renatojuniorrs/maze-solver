@@ -1,56 +1,98 @@
 package main;
 
-public class Stack {
-    private int elements[];
-    private int top;
+public class Stack
+{
+    private String[] elemento;
+    private int      tamanhoInicial;
+    private int      ultimo = -1; 
     
-    
-    /*
-    * Class Constructor
-    **/
-    public Stack(int size) {
-        if(size <=0)
-            throw new IllegalArgumentException("Constructor size must be greater than 0");
-        
-        elements = new int[size];
-        top = -1;
+    // Classe Construtora Padrao
+    public Stack()
+    {
+        this.elemento       = new String [10];
+        this.tamanhoInicial = 10;
     }
     
-    /*
-    * Method that pushes a value to the element
-    **/
-    public void push(int value){
-        if((top+1) >= elements.length)
-            throw new ArrayIndexOutOfBoundsException("You don't have enough size to push");
-        top++;
-        elements[top] = value;
-    }
-    
-    /*
-    * Method that removes the last value from element
-    **/
-    public int pop() throws Exception{
-        if(isEmpty())
-            throw new IllegalStateException("There isn't elements to pop");
+    public Stack (int tamanho) throws Exception
+    {
+        if (tamanho<=0)
+            throw new Exception ("O Tamanho deve ser maior que 0!");
             
-        int value = elements[top];
-        top--; // Element continua na pilha, mas o topo é alterado e ele se torna inacessivel. Isso é um problema?
-        return value;
+        this.elemento       = new String [tamanho];
+        this.tamanhoInicial = tamanho;
     }
     
-    /*
-    * Method that checks if it is empty
-    **/
-    public boolean isEmpty(){
-        return top == -1;
+    public int getQuantidade ()
+    {
+        return this.ultimo+1;
     }
     
-    /*
-    * Method that gets top's element
-    **/
-    public int getTop() throws Exception{
-        if(isEmpty())
-            throw new IllegalStateException("There isn't elements to get");
-        return elements[top];
+    private void redimensioneSe (float fator)
+    {
+        String[] novo = new String [Math.round(this.elemento.length*fator)];
+        
+        for(int i=0; i<=this.ultimo; i++)
+            novo[i] = this.elemento[i];
+
+        this.elemento = novo;
+    }
+    
+    public void guardeUmItem (String valor) throws Exception //Push
+    {
+        if (valor==null)
+            throw new Exception ("Não é possivel andar! Retorne!");
+        
+        if (this.ultimo+1==this.elemento.length) // cheia
+            this.redimensioneSe (2.0F);
+            
+        this.ultimo++;
+        this.elemento[this.ultimo] = valor;
+    }
+
+    public String recupereUmItem () throws Exception //Top
+    {
+        if (this.ultimo==-1)
+            throw new Exception ("Vazio!");
+            
+        return this.elemento[this.ultimo];
+    }
+    
+    public void removaUmItem () throws Exception //Pop
+    {
+        if (this.ultimo==-1)
+            throw new Exception ("Não há mais elementos para destacar");
+            
+        this.elemento[this.ultimo] = null;
+        this.ultimo--;
+        
+        if (this.elemento.length>this.tamanhoInicial &&
+            this.ultimo+1<=Math.round(this.elemento.length*0.25F))
+            this.redimensioneSe (0.5F);
+    }
+    
+    public boolean isVazia ()
+    {
+        return this.ultimo==-1;
+    }
+    
+    public boolean isCheia ()
+    {
+        return this.ultimo==this.elemento.length-1;
+    }
+    
+    @Override
+    public String toString ()
+    {
+        String ret;
+        
+        if (this.ultimo==0)
+            ret="1 elemento";
+        else
+            ret=(this.ultimo+1)+" elementos";
+            
+        if (this.ultimo!=-1)
+            ret += ", sendo o ultimo "+this.elemento[this.ultimo];
+        
+        return ret;
     }
 }

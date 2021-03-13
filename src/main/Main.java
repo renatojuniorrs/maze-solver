@@ -1,13 +1,15 @@
 package main;
 
-public class Main {
+public class Main 
+{
 
 	public static void main(String[] args) {
 	    try {
             Stack st = new Stack(2);  
             
             st.push(1); // Adiciona 1
-            
+            return ret;
+	    }
             System.out.println(st.isEmpty()); // false
             System.out.println(st.pop()); // 1
             System.out.println(st.isEmpty()); // true
@@ -24,5 +26,4 @@ public class Main {
 	    }
 
 	}
-
 }
