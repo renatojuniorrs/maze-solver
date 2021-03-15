@@ -1,17 +1,31 @@
-import java.io.*;
 package main;
 
+import java.io.*;
 
-public class File{
-	   BufferedReader in = null;
-	   try {
-		   in = new BufferedReader(new FileReader("C:\\Users\\Usuario\\git\\maze-solver\\File\\File.Example.txt"));
-		   String str;
-		   while((str = in.readLine()) != null) {
-			   System.out.println(str);
-		   }
-			in.close();   
-	   }catch(IOException e) {
-		   
-	   }
+public class File {
+	private Stack<String> FileContent = new Stack<String>();
+
+	/*
+	 * Default Class Constructor
+	 **/
+	public File(String Name) throws Exception {
+		BufferedReader fileReader = null;
+
+		try {
+			fileReader = new BufferedReader(new FileReader(Name));
+			String line;
+
+			while ((line = fileReader.readLine()) != null) {
+				FileContent.push(line);
+			}
+			fileReader.close();
+		} catch (IOException e) {
+			throw new Exception(e);
+		}
+	}
+	
+	public Stack<String> getFileContent() {
+		return FileContent;
+	}
+
 }

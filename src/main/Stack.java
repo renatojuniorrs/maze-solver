@@ -1,98 +1,82 @@
 package main;
 
-public class Stack
-{
-    private String[] elemento;
-    private int      tamanhoInicial;
-    private int      ultimo = -1; 
-    
-    // Classe Construtora Padrao
-    public Stack()
-    {
-        this.elemento       = new String [10];
-        this.tamanhoInicial = 10;
-    }
-    
-    public Stack (int tamanho) throws Exception
-    {
-        if (tamanho<=0)
-            throw new Exception ("O Tamanho deve ser maior que 0!");
-            
-        this.elemento       = new String [tamanho];
-        this.tamanhoInicial = tamanho;
-    }
-    
-    public int getQuantidade ()
-    {
-        return this.ultimo+1;
-    }
-    
-    private void redimensioneSe (float fator)
-    {
-        String[] novo = new String [Math.round(this.elemento.length*fator)];
-        
-        for(int i=0; i<=this.ultimo; i++)
-            novo[i] = this.elemento[i];
+public class Stack<Type> {
+	private Object elements[];
+	private int top;
 
-        this.elemento = novo;
-    }
-    
-    public void guardeUmItem (String valor) throws Exception //Push
-    {
-        if (valor==null)
-            throw new Exception ("Não é possivel andar! Retorne!");
-        
-        if (this.ultimo+1==this.elemento.length) // cheia
-            this.redimensioneSe (2.0F);
-            
-        this.ultimo++;
-        this.elemento[this.ultimo] = valor;
-    }
+	/*
+	 * Default Class Constructor
+	 **/
+	public Stack() {
+		int size = 10;
+		elements = new Object[size];
+		top = -1;
+	}
 
-    public String recupereUmItem () throws Exception //Top
-    {
-        if (this.ultimo==-1)
-            throw new Exception ("Vazio!");
-            
-        return this.elemento[this.ultimo];
-    }
-    
-    public void removaUmItem () throws Exception //Pop
-    {
-        if (this.ultimo==-1)
-            throw new Exception ("Não há mais elementos para destacar");
-            
-        this.elemento[this.ultimo] = null;
-        this.ultimo--;
-        
-        if (this.elemento.length>this.tamanhoInicial &&
-            this.ultimo+1<=Math.round(this.elemento.length*0.25F))
-            this.redimensioneSe (0.5F);
-    }
-    
-    public boolean isVazia ()
-    {
-        return this.ultimo==-1;
-    }
-    
-    public boolean isCheia ()
-    {
-        return this.ultimo==this.elemento.length-1;
-    }
-    
-    @Override
-    public String toString ()
-    {
-        String ret;
-        
-        if (this.ultimo==0)
-            ret="1 elemento";
-        else
-            ret=(this.ultimo+1)+" elementos";
-            
-        if (this.ultimo!=-1)
-            ret += ", sendo o ultimo "+this.elemento[this.ultimo];
-        
-        return ret;
-    }
+	/*
+	 * Class Constructor with size
+	 **/
+	public Stack(int size) throws Exception {
+		if (size <= 0)
+			throw new IllegalArgumentException("Constructor size must be greater than 0");
+
+		elements = new Object[size];
+		top = -1;
+	}
+
+	/*
+	 * Method that pushes a value to the element
+	 **/
+	public void push(Type value) {
+		if ((top + 1) >= elements.length)
+			autoSize(2); // Increases the element size to double
+		top++;
+		elements[top] = value;
+	}
+
+	/*
+	 * Method that removes the last value from element
+	 **/
+	public Type pop() throws Exception {
+		if (isEmpty())
+			throw new IllegalStateException("There isn't elements to pop");
+
+		Object value = elements[top];
+		top--; // Element continua na pilha, mas o topo é alterado e ele se torna inacessivel.
+				// Isso é um problema?
+		return (Type) value;
+	}
+
+	/*
+	 * Method that checks if it is empty
+	 **/
+	public boolean isEmpty() {
+		return top == -1;
+	}
+
+	/*
+	 * Method that gets top's element
+	 **/
+	public Type getTop() throws Exception {
+		if (isEmpty())
+			throw new IllegalStateException("There isn't elements to get");
+		return (Type) elements[top];
+	}
+
+	/*
+	 * Method that resizes the Stack
+	 **/
+
+	public void autoSize(float factor) {
+		Object[] newElement = new Object[Math.round(elements.length * factor)];
+
+		for (int i = 0; i <= this.top; i++)
+			newElement[i] = elements[i];
+
+		elements = newElement;
+	}
+	
+	public int getTopIndex() {
+		return top;
+	}
 }
