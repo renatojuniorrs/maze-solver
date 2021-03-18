@@ -63,6 +63,15 @@ public class Stack<Type> {
 		return (Type) elements[top];
 	}
 
+	public Type getTop(int value) throws Exception {
+		if (isEmpty())
+			throw new IllegalStateException("There isn't elements to get");
+		if(value>top)
+			throw new IllegalStateException("Ilegal value");
+		
+		return (Type) elements[value];
+	}
+
 	/*
 	 * Method that resizes the Stack
 	 **/

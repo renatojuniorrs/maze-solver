@@ -1,10 +1,11 @@
 package main;
 
 public class Maze {
-	public Stack<String[]> mazeMap;
+	public String[][] mazeMap;
+	
 	
 	public Maze(Stack<String> File) throws Exception {
-		mazeMap = new Stack<String[]>();
+		mazeMap = new String[Integer.parseInt(File.getTop(0))][File.getTop().length()+1];
 		Boolean hasEntry = false;
 		Boolean hasExit = false;
 		int lines = 0;
@@ -18,9 +19,8 @@ public class Maze {
 			if(line.indexOf("S") >= 0)
 				hasExit = true;
 			
-			
+			mazeMap[lines] = lineC;
 			lines++;
-			mazeMap.push(lineC);
 		}
 		
 		if(lines != Integer.parseInt(File.getTop()))
@@ -31,5 +31,3 @@ public class Maze {
 			throw new IllegalArgumentException("Maze has no Exit");
 	}
 }
-
-
