@@ -5,13 +5,27 @@ public class Maze {
 	
 	
 	public Maze(Stack<String> File) throws Exception {
-		mazeMap = new String[Integer.parseInt(File.getTop(0))][File.getTop().length()+1];
+		int numberLines; 
+		int numberColumns;
+		try {
+			numberLines = Integer.parseInt(File.getTop(0));
+			numberColumns = File.getTop().length()+1;
+		}
+		catch(Exception error){ 
+			throw new IllegalArgumentException("Invalid Maze");
+		}
+		
+		if (numberLines <= 0) 
+			throw new IllegalArgumentException("Invalid Maze");
+	
+		mazeMap = new String[numberLines+1][numberColumns+1];
 		Boolean hasEntry = false;
 		Boolean hasExit = false;
-		int lines = 0;
-
-		while(File.getTopIndex() != 0) {
-			String line = File.pop();
+		
+		int lines = numberLines;
+		
+		while(lines > 0) {
+			String line = File.getTop(lines);
 			String[] lineC = line.split("");
 			
 			if(line.indexOf("E") >= 0)
@@ -19,15 +33,17 @@ public class Maze {
 			if(line.indexOf("S") >= 0)
 				hasExit = true;
 			
-			mazeMap[lines] = lineC;
-			lines++;
+			System.out.println(line);
+			mazeMap[(lines)] = lineC;
+			lines--;
 		}
 		
-		if(lines != Integer.parseInt(File.getTop()))
+		if(lines != 0)
 			throw new IllegalArgumentException("Invalid Maze");
 		if(!hasEntry)
 			throw new IllegalArgumentException("Maze has no Entry");
 		if(!hasExit)
 			throw new IllegalArgumentException("Maze has no Exit");
+		System.out.println(mazeMap[0][1]);
 	}
 }
