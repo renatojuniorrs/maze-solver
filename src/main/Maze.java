@@ -22,9 +22,9 @@ public class Maze {
 		Boolean hasEntry = false;
 		Boolean hasExit = false;
 		
-		int lines = numberLines;
-		
-		while(lines > 0) {
+		int lines = 0;
+		lines++;
+		while(lines <= numberLines) {
 			String line = File.getTop(lines);
 			String[] lineC = line.split("");
 			
@@ -32,18 +32,15 @@ public class Maze {
 				hasEntry = true;
 			if(line.indexOf("S") >= 0)
 				hasExit = true;
-			
-			System.out.println(line);
-			mazeMap[(lines)] = lineC;
-			lines--;
+				
+			mazeMap[(lines-1)] = lineC;
+			lines++;
 		}
 		
-		if(lines != 0)
-			throw new IllegalArgumentException("Invalid Maze");
 		if(!hasEntry)
 			throw new IllegalArgumentException("Maze has no Entry");
 		if(!hasExit)
 			throw new IllegalArgumentException("Maze has no Exit");
-		System.out.println(mazeMap[0][1]);
+		System.out.println(mazeMap[1][0]);
 	}
 }
