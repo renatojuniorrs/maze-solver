@@ -3,7 +3,7 @@ package main;
 public class Stack<Type> {
 	private Object elements[];
 	private int top;
-
+    
 	/*
 	 * Default Class Constructor
 	 **/
