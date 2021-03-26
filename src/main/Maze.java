@@ -5,7 +5,6 @@ public class Maze {
 	
 	
 	public Maze(Stack<String> File) throws Exception {
-		//Verification about lines
 		int numberLines; 
 		int numberColumns;
 		try {
@@ -36,18 +35,12 @@ public class Maze {
 				
 			mazeMap[(lines-1)] = lineC;
 			lines++;
-			
-		//Progessive method
-		public Stack stackAdjacent = new Stack();
-		
-		if(mazeMap != "#") 
-		stackAdjacent = new String[numberLines][numberColumns];
-			
 		}
 		
 		if(!hasEntry)
 			throw new IllegalArgumentException("Maze has no Entry");
 		if(!hasExit)
 			throw new IllegalArgumentException("Maze has no Exit");
-	} 
+		System.out.println(mazeMap[1][0]);
+	}
 }
