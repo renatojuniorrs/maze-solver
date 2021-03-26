@@ -41,6 +41,33 @@ public class Maze {
 			throw new IllegalArgumentException("Maze has no Entry");
 		if(!hasExit)
 			throw new IllegalArgumentException("Maze has no Exit");
-		System.out.println(mazeMap[1][0]);
+		/*
+		for(int intLine = 0; intLine < mazeMap.length-1; intLine++) {
+			for(int intColumn = 0; intColumn < mazeMap[intLine].length; intColumn++) {
+				System.out.print(mazeMap[intLine][intColumn]);
+			}
+			System.out.print("\n");
+		}
+		*/
+		
+	}
+	
+	public String[][] getMazeMap(){
+		return this.mazeMap;
+	}
+	
+	public void footPrint(Coordinates coordinate) {
+		int x = coordinate.getX();
+		int y = coordinate.getY();
+		String tile = this.mazeMap[x][y];
+		
+		if(x < 0 || y < 0 || x > this.mazeMap.length-1 || y > this.mazeMap[x].length-1)
+			throw new IllegalArgumentException("You are a not a fish to swim outside the land!");
+		
+		if(tile.equals("#")) {
+			throw new IllegalArgumentException("You can not jump walls!");
+		}
+		
+		this.mazeMap[x][y] = "*";
 	}
 }
