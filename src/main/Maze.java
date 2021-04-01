@@ -70,4 +70,19 @@ public class Maze {
 		
 		this.mazeMap[x][y] = "*";
 	}
+	
+	public void eraseFootPrint(Coordinates coordinate) {
+		int x = coordinate.getX();
+		int y = coordinate.getY();
+		String tile = this.mazeMap[x][y];
+		
+		if(x < 0 || y < 0 || x > this.mazeMap.length-1 || y > this.mazeMap[x].length-1)
+			throw new IllegalArgumentException("You are a not a fish to swim outside the land! ("+x+","+y+")");
+		
+		if(!tile.equals("*"))
+			throw new IllegalArgumentException("You can't cheat an honest code ("+x+","+y+")");
+		
+		
+		this.mazeMap[x][y] = " ";
+	}
 }

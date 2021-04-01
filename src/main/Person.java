@@ -4,10 +4,14 @@ public class Person {
 	private Maze maze;
 	private Coordinates coordinate;
 	private Stack<Coordinates> adjacent;
+	private Stack<Stack<Coordinates>> chance;
+	private Stack<Coordinates> mentalMap;
 	private boolean winner = false;
 	
 	public Person(Maze maze) throws Exception {
 		this.maze = maze;
+		this.chance = new  Stack<Stack<Coordinates>>(3);
+		this.mentalMap = new Stack<Coordinates>(3);
 		String[][] mazeMap = maze.getMazeMap();
 		
 		// He tries to find `E`, to know where he is
@@ -25,11 +29,11 @@ public class Person {
 		
 		if(!foundEntry)
 			throw new IllegalArgumentException("Sorry, I could'nt find the entry");
-		
-		this.adjacent = new Stack<Coordinates>(3);
 	}
 	
 	public Boolean think() throws Exception {
+		this.adjacent = new Stack<Coordinates>(3);
+		
 		if(this.winner) {
 			throw new IllegalArgumentException("I already found the exit, I won!");
 		}
@@ -44,10 +48,42 @@ public class Person {
 			look(Positions.LEFT);
 			look(Positions.RIGHT);
 			
-			trackInMap();
-			walk(adjacent.pop());	
+			if(!this.adjacent.isEmpty()) {
+				keepForward();
+			}else {
+				goBack();
+			}
+			
 			return true;
 		}
+	}
+	
+	private void keepForward() throws Exception {
+		trackInMap();
+		walk(this.adjacent.getTop());
+		this.mentalMap.push(adjacent.pop());
+		this.chance.push(adjacent);
+		
+	}
+	
+	private void goBack() throws Exception {
+		this.mentalMap.pop();
+		while(!this.chance.isEmpty()) {
+			this.adjacent = this.chance.pop();
+			if(this.adjacent.isEmpty()) {
+				walk(this.mentalMap.pop());
+				eraseMap();
+			}else {
+				walk(this.mentalMap.pop());
+				eraseMap();
+				keepForward();
+				break;
+			}
+		}
+	}
+	
+	private void eraseMap() {
+		this.maze.eraseFootPrint(this.coordinate);
 	}
 	
 	private void trackInMap() {
