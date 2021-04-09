@@ -67,14 +67,23 @@ public class Person {
 	}
 	
 	private void goBack() throws Exception {
-		this.mentalMap.pop();
+		try {
+			this.mentalMap.pop();
+		}catch(Exception e) {
+			System.err.println("Erro Aqui 1.");
+		}
+		
 		while(!this.chance.isEmpty()) {
 			this.adjacent = this.chance.pop();
 			if(this.adjacent.isEmpty()) {
-				walk(this.mentalMap.pop());
+				Coordinates mMap = this.mentalMap.pop();
+				walk(mMap);
 				eraseMap();
 			}else {
-				walk(this.mentalMap.pop());
+				Coordinates mMap = this.mentalMap.pop();
+				walk(mMap);
+				this.mentalMap.push(mMap);
+				
 				eraseMap();
 				keepForward();
 				break;
@@ -155,6 +164,10 @@ public class Person {
 			}
 			System.out.print("\n");
 		}
+	}
+	
+	public Coordinates getCoordinates() {
+		return this.coordinate;
 	}
 	
 }

@@ -13,6 +13,7 @@ public class Main {
 				bobThought = Bob.think();
 				System.out.println("-------------------------------------------------------------------");
 				Bob.writeSolution();
+				System.err.println("Bob was at ("+Bob.getCoordinates().getX()+", "+Bob.getCoordinates().getY()+")");
 			}
 			System.out.println("Bingo! Bob is the winner!!!!!!");
 		} catch (Exception e) {
