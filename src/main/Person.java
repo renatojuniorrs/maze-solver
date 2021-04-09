@@ -67,12 +67,7 @@ public class Person {
 	}
 	
 	private void goBack() throws Exception {
-		try {
-			this.mentalMap.pop();
-		}catch(Exception e) {
-			System.err.println("Erro Aqui 1.");
-		}
-		
+		this.mentalMap.pop();
 		while(!this.chance.isEmpty()) {
 			this.adjacent = this.chance.pop();
 			if(this.adjacent.isEmpty()) {
