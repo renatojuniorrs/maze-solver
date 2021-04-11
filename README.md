@@ -13,6 +13,48 @@ To organize the development process of this project, it is being divided into 3 
 - Developed by Guilherme Araujo Alexandre
 - Developed by Lucas Ament.
 
-# Screenshots
+# Screenshots delivery of Product 1 (P1)
 
 Tests of the 6 mazes passed in class for tests.
+
+***Maze 1***
+- This maze contains exactly 21 lines
+
+Post-build result:
+
+![image](https://user-images.githubusercontent.com/69830140/114288337-440c2680-9a45-11eb-93b3-4eaa26fc5662.png)
+
+***Maze 2***
+- This maze contains exactly 21 lines
+
+Post-build result:
+
+![image](https://user-images.githubusercontent.com/69830140/114288353-6b62f380-9a45-11eb-88a8-fabf8e9eb898.png)
+
+***Maze 3***
+- This maze contains exactly 201 lines
+
+Post-build result:
+
+![image](https://user-images.githubusercontent.com/69830140/114290175-f1863680-9a53-11eb-8ec5-f2843f9c06d2.png)
+
+***Maze 4***
+- This maze contains exactly 201 lines
+
+Post-build result:
+
+![image](https://user-images.githubusercontent.com/69830140/114290223-4a55cf00-9a54-11eb-8504-50f6f1071151.png)
+
+***Maze 5***
+- This maze contains exactly 201 lines
+
+Post-build result:
+
+![image](https://user-images.githubusercontent.com/69830140/114290239-6f4a4200-9a54-11eb-97ea-4c2737ffc65f.png)
+
+***Maze 6***
+- This maze contains exactly 807 lines
+
+Post-build result:
+
+![image](https://user-images.githubusercontent.com/69830140/114290254-93a61e80-9a54-11eb-9d91-dad23517bded.png)
