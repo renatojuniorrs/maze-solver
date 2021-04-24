@@ -2,6 +2,14 @@ package main;
 
 public class Main {
 
+  /**
+  * Class that declares everything that will be used in the program (File, Labyrinth and Person), in addition to printing the message '----' 
+  * (Meaning Bob didn't make it to the end of the maze) and the one Bob declared champion.
+  * 
+  * @param String[] args       	String array that declares the variables that will be used in the program.
+  * @return                     void
+  */
+	
 	public static void main(String[] args) {
 		Boolean bobThought = null;
 		try {
