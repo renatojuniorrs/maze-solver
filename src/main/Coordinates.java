@@ -1,16 +1,16 @@
 package main;
 
  /**
-  * Classe que demonstra as coordenadas a serem percorridas no labirinto.
+  * Class that shows the coordinates to be traversed in the maze
   * 
-  * @param coordinate       	Coordenada inteira que sera transformada em 2 coordenadas- x e y
-  * @param getCoordinate    	Obtem as coordenadas que serao percorridas
-  * @param getX             	Obtem as coordenadas de X percorridas
-  * @param getY             	Obtem as coordenadas de Y percorridas
-  * @param updateCoordinates    Altera o caminho que foi percorrido no labirinto
-  * @return                     Retorna todas as coordenadas obtidas
-  * @return                     Retorna as coordenadas obtidas de X em 0
-  * @return                     Retorna as coordenadas obtidas de Y em 1
+  * @param coordinate       	Integer coordinate that will be transformed into 2 x- and y-coordinates
+  * @param getCoordinate    	Get the coordinates to be traversed
+  * @param getX             	Obtains the X coordinates traveled
+  * @param getY             	Obtains the Y coordinates traveled
+  * @param updateCoordinates    Change the path that was taken in the maze
+  * @return                     Returns all obtained coordinates
+  * @return                     Returns the coordinates obtained from X at 0
+  * @return                     Returns the coordinates obtained from Y at 1
   */
 
 public class Coordinates {
