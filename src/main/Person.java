@@ -1,5 +1,14 @@
 package main;
 
+/**
+ * Class that declares the maze, the coordinates of the pile that the person 
+ * will go through and verifies that he is not a Champion.
+ * In this class we find the progressive and regressive methods,
+ * finding the 'E' to see where it is and looking for the 'S' to find the exit from the maze.
+ * In addition to defining the positions Bob travels through. 
+ * Write and erase the "tracks" left by Bob.
+ */
+
 public class Person {
 	private Maze maze;
 	private Coordinates coordinate;
@@ -13,6 +22,13 @@ public class Person {
 		this.chance = new  Stack<Stack<Coordinates>>(3);
 		this.mentalMap = new Stack<Coordinates>(3);
 		String[][] mazeMap = maze.getMazeMap();
+		
+/**
+ * 
+ * @param intLine		Sets the size of the lines of the maze to locate.
+ * @param intColumn 	Sets the size of the columns of the maze to locate.
+ * @return				void
+ */
 		
 		// He tries to find `E`, to know where he is
 		boolean foundEntry = false;
@@ -37,10 +53,19 @@ public class Person {
 		if(this.winner) {
 			throw new IllegalArgumentException("I already found the exit, I won!");
 		}
+/**
+ * @return false  It returns false if it does not find the exit to be champion.
+ */
 		else if(getStepAt().equals("S")) {
 			winner = true;
 			trackInMap();
 			return false;
+			
+/**
+ * @param  me		Declares the positions that bob must walk in the maze.
+ * @return true  	It returns true if the adjacent side is empty.
+ */
+			
 		}else {
 			int[] me = this.coordinate.getCoordinate();
 			look(Positions.TOP);
@@ -58,6 +83,12 @@ public class Person {
 		}
 	}
 	
+/**
+ * Here we have the progressive method
+ * 
+ * @param  keepForward	Set Bob's floor through the maze until he finds the exit.
+ */	
+
 	private void keepForward() throws Exception {
 		trackInMap();
 		walk(this.adjacent.getTop());
@@ -65,6 +96,12 @@ public class Person {
 		this.chance.push(adjacent);
 		
 	}
+	
+/**
+ * Here we have the regressive method
+ * 
+ * @param  goBack	Sets Bob's return inside the maze until he finds the exit.
+ */	
 	
 	private void goBack() throws Exception {
 		this.mentalMap.pop();
@@ -86,13 +123,31 @@ public class Person {
 		}
 	}
 	
+/**
+ * Here we have the method that erases the "tracks" left by bob while he walks.
+ * Staying just the right way to get to the exit.
+ * 
+ * @param  eraseMap	 Erase the "tracks" left by Bob.
+ */	
+	
 	private void eraseMap() {
 		this.maze.eraseFootPrint(this.coordinate);
 	}
 	
+/**
+ * @param  trackInMap	 Leave only the trail that meets the exit of the maze.
+ */	
+	
 	private void trackInMap() {
 		this.maze.footPrint(this.coordinate);
 	}
+	
+/**
+ * @param  look		Check the positions that Bob can walk and add him only if he is on his way to 'S'.
+ * @param  x		Defines what the maze lines will look like, from the positions that bob has to walk.
+ * @param  y		Defines what the maze colunms will look like, from the positions that bob has to walk.
+ * @return 		  	void
+ */
 	
 	private void look(Positions lookingAt) {
 		int x = this.coordinate.getX();
@@ -134,6 +189,11 @@ public class Person {
 		return;
 	}
 	
+/**
+ * @param  	walk			Sets the coordinates for Bob to walk on the maze.
+ * @param   writeSolution	Write the solution to the maze, defining the entire path taken by Bob. 	
+ */
+	
 	public void walk(Coordinates coordinate) {
 		this.coordinate = coordinate;
 	}
@@ -150,7 +210,14 @@ public class Person {
 		this.maze = maze;
 		String[][] mazeMap = maze.getMazeMap();
 		
-		// He tries to find `E`, to know where he is
+/**
+ * Method that tries to find `E`, to know where he is and exits infinite looping.
+ * 
+ * @param intLine		Sets the size of the lines of the maze to locate.
+ * @param intColumn 	Sets the size of the columns of the maze to locate.
+ * @return				void
+ */
+	
 		boolean foundEntry = false;
 		outerloop: // Sair do loop inteiro
 		for(int intLine = 0; intLine < mazeMap.length-1; intLine++) {
@@ -160,6 +227,10 @@ public class Person {
 			System.out.print("\n");
 		}
 	}
+	
+/**
+ * @return	this.coordinate		Returns the coordinates of the maze.
+ */
 	
 	public Coordinates getCoordinates() {
 		return this.coordinate;

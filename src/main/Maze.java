@@ -2,8 +2,17 @@ package main;
 
 public class Maze {
 	public String[][] mazeMap;
-	
-	
+
+/**
+ * Methods that defines the number of lines and columns in the maze, 
+ * and which can be returned in an invalid or no existent maze.
+ * 
+ * @param  numberLines		Sets the number of lines in the maze
+ * @param  numberColumns	Sets the number of colunms in the maze
+ * @param  lines			Defines the lines of the maze that should be = 0 and ++
+ * @return					void
+ */
+		
 	public Maze(Stack<String> File) throws Exception {
 		int numberLines; 
 		int numberColumns;
@@ -55,6 +64,17 @@ public class Maze {
 	public String[][] getMazeMap(){
 		return this.mazeMap;
 	}
+	
+/**
+ * Methods that define Bob's walk and return through the maze, 
+ * until he finds the exit leaving a trail: '*' where to go. 
+ * 
+ * @param  footPrint		Prints the coordinates in the maze.
+ * @param  x				Defines what the maze lines will look like
+ * @param  y				Defines what the maze colunms will look like
+ * @param  eraseFootPrint	Erase the traces: '*' left by bob.	
+ * @return 					void
+ */
 	
 	public void footPrint(Coordinates coordinate) {
 		int x = coordinate.getX();
